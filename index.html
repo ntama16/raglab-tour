@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAG Lab Advanced: a tour</title>
+<meta name="description" content="A local lab for advanced retrieval-augmented generation. Every technique runs against real models, and every stage shows its inputs, outputs, timings, prompts and raw responses.">
+<meta property="og:title" content="RAG Lab Advanced: a tour">
+<meta property="og:description" content="A 70-second tour of a local lab for advanced RAG, from model setup to comparing two pipeline runs.">
+<meta property="og:image" content="https://ntama16.github.io/raglab-tour/poster.jpg">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0c111f;
+    --panel: #161d30;
+    --border: #2c3650;
+    --text: #eceff8;
+    --muted: #96a0b6;
+    --accent: #f0a830;
+    --violet: #7a6cf0;
+    --pink: #e268aa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.6 "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  main { max-width: 1120px; margin: 0 auto; padding: 56px 16px 80px; }
+  header { display: flex; align-items: center; gap: 18px; }
+  .logo { display: flex; gap: 6px; }
+  .logo span { width: 10px; height: 38px; border-radius: 4px; }
+  h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.1; letter-spacing: -0.01em; }
+  .lede { margin: 18px 0 0; max-width: 46em; color: var(--muted); font-size: 19px; }
+  video {
+    display: block; width: 100%; margin: 36px 0 0; border-radius: 14px;
+    border: 1px solid var(--border); background: #000; aspect-ratio: 16 / 9;
+  }
+  h2 { margin: 64px 0 6px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .section-lede { margin: 0 0 20px; color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  figure { margin: 0; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  figure.wide { grid-column: 1 / -1; }
+  figure a { display: block; }
+  figure img { display: block; width: 100%; height: auto; }
+  figcaption { padding: 14px 16px 16px; font-size: 15px; color: var(--muted); }
+  figcaption b { color: var(--text); font-weight: 600; }
+  footer { margin-top: 64px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 720px) {
+    main { padding-top: 32px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="logo" aria-hidden="true"><span style="background:var(--accent)"></span><span style="background:var(--violet)"></span><span style="background:var(--pink)"></span></div>
+    <h1>RAG Lab Advanced</h1>
+  </header>
+  <p class="lede">A local lab for advanced retrieval-augmented generation. Every technique runs for real against real models
+    (local Ollama, any OpenAI-compatible server, Anthropic, or a rerank API), and every stage shows its inputs, outputs,
+    timings, prompts and raw model responses.</p>
+
+  <video controls preload="metadata" playsinline poster="poster.jpg">
+    <source src="raglab-intro.mp4" type="video/mp4">
+    Your browser cannot play this video. <a href="raglab-intro.mp4">Download it</a> instead.
+  </video>
+
+  <h2>Setup and build</h2>
+  <p class="section-lede">Point four model roles at local or cloud endpoints, load a corpus, build indexes several ways, and look at the space they make.</p>
+  <div class="grid">
+    <figure><a href="screens/01-models-four-roles.jpg"><img src="screens/01-models-four-roles.jpg" alt="Models page with embedding, reranker, router and generator roles" loading="lazy" width="1600" height="917"></a>
+      <figcaption><b>Models.</b> Embedding, reranker, router and generator, each on Ollama, an OpenAI-compatible server, Anthropic or a cross-encoder.</figcaption></figure>
+    <figure><a href="screens/02-corpus-documents-metadata.jpg"><img src="screens/02-corpus-documents-metadata.jpg" alt="Corpus page listing documents with metadata" loading="lazy" width="1600" height="908"></a>
+      <figcaption><b>Corpus.</b> Front matter becomes filterable metadata. Two sample corpora, Halcyon and Kestrel, load with one click.</figcaption></figure>
+    <figure><a href="screens/03-chunking-build-indexes.jpg"><img src="screens/03-chunking-build-indexes.jpg" alt="Chunking page with index build options and built indexes" loading="lazy" width="1600" height="885"></a>
+      <figcaption><b>Chunking.</b> Each build is its own index: strategy, size, parent-child, contextual retrieval, dedupe, graph.</figcaption></figure>
+    <figure><a href="screens/04-vector-space-pca-map.jpg"><img src="screens/04-vector-space-pca-map.jpg" alt="Vector space PCA map of every chunk" loading="lazy" width="1600" height="845"></a>
+      <figcaption><b>Vector space.</b> Every chunk on a PCA or UMAP map. Drop in a phrase to see where a query lands.</figcaption></figure>
+  </div>
+
+  <h2>Run</h2>
+  <p class="section-lede">Rewrite the query in the corpus's own words, then trace one question through every stage of the pipeline.</p>
+  <div class="grid">
+    <figure><a href="screens/05-normalisation-lab-rules-bm25.jpg"><img src="screens/05-normalisation-lab-rules-bm25.jpg" alt="Normalisation lab showing rules and BM25 results before and after" loading="lazy" width="1600" height="936"></a>
+      <figcaption><b>Normalisation lab.</b> Aliases, acronyms, terminology and durations, with BM25 results before and after.</figcaption></figure>
+    <figure><a href="screens/06-workbench-pipeline-timing.jpg"><img src="screens/06-workbench-pipeline-timing.jpg" alt="Workbench with the pipeline settings, answer and timing bar" loading="lazy" width="1600" height="980"></a>
+      <figcaption><b>Workbench.</b> Twelve switchable stages, the answer, and where every millisecond and token went.</figcaption></figure>
+    <figure><a href="screens/07-workbench-query-variants-retrieval.jpg"><img src="screens/07-workbench-query-variants-retrieval.jpg" alt="Query variants and dense and BM25 result lists" loading="lazy" width="1600" height="997"></a>
+      <figcaption><b>Retrieval.</b> Multi-query variants, then dense HNSW and BM25 lists side by side, with HNSW recall against exact search.</figcaption></figure>
+    <figure><a href="screens/08-workbench-query-map-fusion.jpg"><img src="screens/08-workbench-query-map-fusion.jpg" alt="Query on the vector map and a rank-flow chart for fusion" loading="lazy" width="1600" height="984"></a>
+      <figcaption><b>Fusion.</b> The query starred among its nearest chunks, and each passage's rank traced into the fused order.</figcaption></figure>
+    <figure><a href="screens/10-workbench-rerank-cross-encoder.jpg"><img src="screens/10-workbench-rerank-cross-encoder.jpg" alt="Rerank stage showing rank movement" loading="lazy" width="1600" height="867"></a>
+      <figcaption><b>Rerank.</b> A cross-encoder reorders the candidates, and every move up or down is shown.</figcaption></figure>
+    <figure><a href="screens/11-workbench-corrective-rag-grading.jpg"><img src="screens/11-workbench-corrective-rag-grading.jpg" alt="Corrective RAG grading each passage" loading="lazy" width="1600" height="972"></a>
+      <figcaption><b>Corrective RAG.</b> Each passage graded relevant, partial or irrelevant before the context is assembled.</figcaption></figure>
+    <figure class="wide"><a href="screens/12-workbench-context-generation-groundedness.jpg"><img src="screens/12-workbench-context-generation-groundedness.jpg" alt="Context assembly, generation and groundedness check" loading="lazy" width="1600" height="963"></a>
+      <figcaption><b>Context, answer, groundedness.</b> Context packed to a token budget, a cited answer, and each claim checked against the passages it was given.</figcaption></figure>
+  </div>
+
+  <h2>Compare</h2>
+  <p class="section-lede">One question under two configurations.</p>
+  <div class="grid">
+    <figure><a href="screens/13-compare-two-runs.jpg"><img src="screens/13-compare-two-runs.jpg" alt="Compare page showing two answers and which passages reached the model" loading="lazy" width="1600" height="893"></a>
+      <figcaption><b>Two runs.</b> The settings that differed, both answers, and which passages reached the model on each side.</figcaption></figure>
+    <figure><a href="screens/14-compare-stage-by-stage.jpg"><img src="screens/14-compare-stage-by-stage.jpg" alt="Stage-by-stage time and token comparison" loading="lazy" width="1600" height="970"></a>
+      <figcaption><b>Stage by stage.</b> Time and tokens for every stage of both runs, and what differed at each.</figcaption></figure>
+  </div>
+
+  <footer>Then measure it: evaluation sets scored per stage, parameter sweeps, a technique atlas and an in-app guided first run.</footer>
+</main>
+</body>
+</html>
